@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- <link rel="shortcut icon" href="./favicon.ico"> -->
+    <meta charset="utf-8" lang="kr">
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="style/fontstyle.css" />
+    <link rel="stylesheet" type="text/css" href="style/newstyle.css" />
+
+    <title> TAB악보 MP3 Sync tool </title>
+    <style>
+      @media ( max-width: 768px ) {   /* 모바일용 CSS 스타일쉬트 */
+        @import url("style/newstyle_m.css"); 
+      }
+      @media ( min-width: 769px ) {   /* PC브라우저용 CSS 스타일쉬트 */
+        @import url("style/newstyle.css"); 
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>TAB(ukulele) - MP3 Syncronize Tool </h1>
+      <span id="song_selector">Select Song:<select id="song_list">
+        <!-- <option>세계의 약속 - 하울의 움직이는 성 </option>
+        <option selected="selected">하와이 연정 - 패티킴</option>
+        <option>때로는 옛 이야기를 - 센과 치히로의 행방불명</option> -->
+      </select> </span> </br>
+    </header>
+
+    <div class="info">
+      <img id="thumbnail" width="128" height="96" src="common/ukulele_icon.png"></img>
+      <p>제목: <span id="song_title"></span><br/>
+      표지:  <input type="file" id="loadThumbnail" accept="image/*" onchange="changeThumnail()"/> <span id="loadThumbnail_file"></span> <br/>
+      곡 설명: <span id="comments"></span><br/>
+      음원: <input type="file" id="loadMP3" accept=".mp3"/> <span id="loadMP3_file"></span> </p>
+    </div>
+    <div class="beat_setting">
+      <p>
+        편집단위:<select id="quaver_mode" onchange="quaver_changed();">
+          <option selected="selected">8분음표로 편집 </option>
+          <option>16분음표로 편집</option>
+        </select>, 
+        <span class="space"></span>
+        박자: <input id="signature" size="8" value="4/4" onchange="signature_changed();"></input> 
+        BPM: <input id="bpm" type="number" min="20" max="280" size="4" value="60" onchange="bpm_changed();"></input>, 
+        Playing Offset: <input id="offset" type="number" min="-2000" max="2000" step="10" size="8" value="0" onchange="offset_changed();"></input>msec, 
+      </p>
+    </div>
+    <div class="control_panel">
+      <img src="common/zoom-in.svg" id="zoomin" class="ctrl_btn" onclick="zoom_in();"></img>
+      <img src="common/zoom-out.svg" id="zoomout" class="ctrl_btn" onclick="zoom_out();"></img>
+      <span class="space"></span>
+      <audio id="playing_audio"></audio>
+      <img src="common/goto_head.svg" id="goto_head" class="ctrl_btn" onclick="goto_head();"></img>
+      <img src="common/play.svg" id="play_song" class="ctrl_btn" onclick="play_song();"></img>
+      <img src="common/stop.svg" id="stop_song" class="ctrl_btn" onclick="stop_song();"></img>
+      <img src="common/rewind_10sec.svg" id="rew_10s" class="ctrl_btn" onclick="rewind_10sec();"></img>
+      <span class="space"></span>
+      <img src="common/_slow0.5.svg" id="speed_0_5" class="ctrl_btn" onclick="change_speed(0.5);"></img>
+      <img src="common/_slow0.75.svg" id="speed_0_75" class="ctrl_btn" onclick="change_speed(0.75);"></img>
+      <img src="common/ff1.0.svg" id="speed_1_0" class="ctrl_btn" onclick="change_speed(1.0);"></img>
+      <img src="common/_ff1.25.svg" id="speed_1_25" class="ctrl_btn" onclick="change_speed(1.25);"></img>
+      <img src="common/_ff1.5.svg" id="speed_1_5" class="ctrl_btn" onclick="change_speed(1.5);"></img>
+      <img src="common/_ff2.0.svg" id="speed_2_0" class="ctrl_btn" onclick="change_speed(2.0);"></img>
+      <span class="space"></span>
+      <img src="common/tab_up.svg" id="upload_tab" class="ctrl_btn" onclick="upload();"></img>
+      <img src="common/tab_down.svg" id="download_tab" class="ctrl_btn" onclick="download();"></img>
+    </div>
+
+    <canvas id="edit_area" >캔버스기능이 필요함</canvas>
+
+    <img id="uke_note" style="display:none" src="./common/uke_note.png"/>
+    <img id="whole_chords" style="display:none" src="./common/chord_total.png"/>
+
+    <script src="./script/new_edit.js" type="text/javascript" charset="utf-8"/> </script>
+
+    <div id="note_edit_window" class="dialog closed">
+      <p class="dlg_title">NOTE EDIT</p>
+      <p><span class="label">time stamp</span><input id="timeStamp_input" type="number" value="0"/><span class="label unit">msec</span>  <br/>
+        <span class="label">lyric</span><input id="lyric_input" type="text" value=""/>  <br/>
+        <span class="label">chord</span><input id="chord_input" type="text" value=""/> <button id="auto" onclick="set_chord_auto();">AUTO</button>  <br/>
+        <span class="label">A</span><input id="a_input" type="text" value=""/>  <br/>
+        <span class="label">E</span><input id="e_input" type="text" value=""/>  <br/>
+        <span class="label">C</span><input id="c_input" type="text" value=""/>  <br/>
+        <span class="label">G</span><input id="g_input" type="text" value=""/>
+      </p>
+      <p><span class="label">Stroke</span><input id="stroke_input" type="text" value=""/><br/>
+      <span class="label">Technic</span><input id="technic_input" type="text" value=""/></p>
+      <p id="delete_check"><input id="remove_note" type="checkbox">delete this note.</button> </p>
+      <p class="button_line"><button id="ok" onclick="btn_ok_click();">지정</button> <button id="cancel" onclick="btn_cancel_click();">취소</button> </p>
+    </div>
+
+    <div class="guide">
+      <img id="finger_guide" src="./common/finger_guide.png"/>
+    </div>
+  </body>
+</html>
+

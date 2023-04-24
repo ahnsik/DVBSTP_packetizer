@@ -1,0 +1,61 @@
+/*
+  Ahnsik 홈페이지의 기본 스타일 쉬트
+    - 웹폰트 모음 -
+  by Ahnsik.Choi
+*/
+
+/* Simple Reset CSS */
+@font-face {
+    font-family: 'BBTreeGB';        
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_nine_@1.1/BBTreeGB.woff') format('woff');
+}
+@font-face {
+    font-family: 'BBTreeGL';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_nine_@1.1/BBTreeGL.woff') format('woff');
+}
+@font-face {
+    font-family: 'GyeonggiBatang';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GyeonggiBatang.woff') format('woff');
+}
+@font-face {
+    font-family: 'GyeonggiTitleM';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GyeonggiTitleM.woff') format('woff');
+}
+@font-face {
+    font-family: 'JSDongkang-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/JSDongkang-RegularA1.woff') format('woff');
+}
+@font-face {
+    font-family: '777Redpostbox';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_nine_@1.1/777Redpostbox.woff') format('woff');
+}
+@font-face {
+    font-family: 'BinggraeMelona-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/BinggraeMelona-Bold.woff') format('woff');
+}
+@font-face {
+    font-family: 'BinggraeMelona';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/BinggraeMelona.woff') format('woff');
+}
+@font-face {
+    font-family: 'SeoulNamsan';
+    font-weight: 700;
+    font-style: normal;
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/seoulnamsan/SeoulNamsanBold.eot');
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/seoulnamsan/SeoulNamsanBold.eot?#iefix') format('embedded-opentype'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/seoulnamsan/SeoulNamsanBold.woff2') format('woff2'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/seoulnamsan/SeoulNamsanBold.woff') format('woff'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/seoulnamsan/SeoulNamsanBold.ttf') format("truetype");
+    font-display: swap;
+}
+@font-face {
+    font-family: 'SeoulNamsan canvas';
+    font-weight: 400;
+    font-style: normal;
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/seoulnamsan/SeoulNamsanBold.eot');
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/seoulnamsan/SeoulNamsanBold.eot?#iefix') format('embedded-opentype'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/seoulnamsan/SeoulNamsanBold.woff2') format('woff2'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/seoulnamsan/SeoulNamsanBold.woff') format('woff'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/seoulnamsan/SeoulNamsanBold.ttf') format("truetype");
+    font-display: swap;
+}

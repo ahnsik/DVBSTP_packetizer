@@ -1,0 +1,38 @@
+
+table, td, th {
+    border-collapse: collapse;
+    border:1px solid black;
+    text-align: center;
+    color: #949494;
+}
+th {
+    width: 1.5em;
+    background-color: #CCC;
+}
+td {
+    background-color: #e7e4e2;
+}
+
+textarea {
+    width: "100%";
+}
+
+.result td {
+    color: darkblue;
+}
+
+.result {
+    padding: 20px;
+}
+.stream_input {
+    margin-top: 40px;
+    padding: 20px;
+}
+
+input {
+    width: "100%";
+}
+
+sub {
+    color: rgb(111, 116, 106);
+}
