@@ -74,19 +74,25 @@ var dvbstp_parse = (blob) => {
 }
 
 var dvbstp_file_changed = (imgsrc) => {    /* when ThumbNail file upload succed. */
-//   let imgTag = document.getElementById("dvbstp_file_in");
-//   imgTag.src = "http://ccash.gonetis.com:88/uke_blog/data/"+ imgsrc;
-//   document.getElementById("loadThumbnail_file").innerHTML = imgsrc;
-    console.log(" 파일을 지정했다. 아직 loading 할 줄 모른다. ");
+    let loadingfiles = document.getElementById("dvbstp_file_in");  //.dataTransfer.files;
+    console.log(" 파일"+ loadingfiles.files[0].name +"을 지정했다. 아직 loading 할 줄 모른다. ");
+    const reader = new FileReader();
+    reader.addEventListener('load', (event) => {
+        let buffer = new Uint8Array(reader.result);
+        console.log("check : " + buffer);
+        dvbstp_parse(buffer);
+        set_result();
+    });
+    reader.readAsArrayBuffer(loadingfiles.files[0]);     //    - File이나 Blob의 바이너리 데이터를 읽어서 ArrayBuffer로 반환
 }
 
 var dvbstp_from_text = () => {
     let long_text = document.getElementById("dvbstp_packet").value;
     console.log("test용 문자열: " + long_text );
-    var blob = convert_text_to_blob(long_text);
+    let blob = convert_text_to_blob(long_text);
 
     console.log("변환한 값: " );
-    for (var i=0; i<blob.length; i++) {
+    for (let i=0; i<blob.length; i++) {
         console.log(blob[i]);
     }
  

@@ -33,6 +33,10 @@ input {
     width: "100%";
 }
 
+#dvbstp_file_in {
+    border: 1px solid royalblue;
+}
+
 sub {
     color: rgb(111, 116, 106);
 }
