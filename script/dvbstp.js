@@ -78,16 +78,17 @@ var dvbstp_parse = (blob) => {
         payload_start_idx += 4;
     }
 
-    let blob_payload = blob.slice(payload_start_idx, blob.length-5);
+    let blob_payload = blob.slice(payload_start_idx, blob.length-4);
     val_payload = dump_blob( blob_payload, 0 );
 
     calculated_crc = b_crc32(blob_payload);
     console.log(" temporary CRC : " + calculated_crc.toString(16) + " blob.length=" + blob_payload.length);
 
     if (val_c != 0) {
-        let tail_idx = blob.length-1;
-        let crc_value = (blob[tail_idx-4]<<24) | (blob[tail_idx-3]<<16) | (blob[tail_idx-2]<< 8) | blob[tail_idx-1]&0xFF;
-        val_crc = crc_value.toString(16).toUpperCase();
+        let tail_idx = blob.length;
+        // let crc_value = (blob[tail_idx-4]<<24) | (blob[tail_idx-3]<<16) | (blob[tail_idx-2]<< 8) | blob[tail_idx-1]&0xFF;
+        // val_crc = crc_value.toString(16).toUpperCase();
+        val_crc = blob[tail_idx-4].toString(16)+ " " +blob[tail_idx-3].toString(16)+" "+blob[tail_idx-2].toString(16)+" "+blob[tail_idx-1].toString(16);
     } else {
         val_crc = "--------";
     }
