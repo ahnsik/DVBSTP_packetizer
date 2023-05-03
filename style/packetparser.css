@@ -1,3 +1,6 @@
+body {
+    background-color: #FFD;
+}
 
 table, td, th {
     border-collapse: collapse;
@@ -15,6 +18,10 @@ td {
 
 textarea {
     width: "100%";
+}
+
+.comment {
+    color: lightgray;
 }
 
 .result td {
