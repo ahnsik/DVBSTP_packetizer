@@ -68,14 +68,20 @@ var dvbstp_parse = (blob) => {
     val_compr = (blob[11] >> 5)& 0x07;
     val_p = (blob[11] >> 4)& 0x01;
     val_hdrLen = blob[11]& 0x0F;
-    val_serviceProviderId = (blob[12]<<24) | (blob[13]<<16) | (blob[14]<< 8) | blob[15]&0xFF;
-    let payload_start_idx = 16;
-    if (val_hdrLen==0) {
-        val_privateHeaderData = 0;
-        txt_privateHeaderData.innerHTML = "";
+    let payload_start_idx = 12;
+    if (val_p != 0) {
+        val_serviceProviderId = (blob[12]<<24) | (blob[13]<<16) | (blob[14]<< 8) | blob[15]&0xFF;
+        payload_start_idx += 4;
     } else {
+        val_serviceProviderId = 0;
+        txt_serviceProviderId.innerHTML = "";
+    }
+    if (val_hdrLen!=0) {
         val_privateHeaderData = (blob[16] <<24) | (blob[17] <<16) | (blob[18] << 8) | blob[19]&0xFF;
         payload_start_idx += 4;
+    } else {
+        val_privateHeaderData = 0;
+        txt_privateHeaderData.innerHTML = "";
     }
 
     let blob_payload = blob.slice(payload_start_idx, blob.length-4);
@@ -165,15 +171,19 @@ var set_result = () => {
     txt_compr.innerHTML = "<sub>Compr:</sub> "+ val_compr;
     txt_p.innerHTML = val_p;
     txt_hdrLen.innerHTML = "<sub>HDR_LEN:</sub> "+ val_hdrLen
-    txt_serviceProviderId.innerHTML = "<sub>ServiceProviderID:</sub> "+ val_serviceProviderId + " (0x"+val_serviceProviderId.toString(16).toUpperCase()+")";
-    if (val_privateHeaderData != 0) {
+    if (val_p != 0) {
+        txt_serviceProviderId.innerHTML = "<sub>ServiceProviderID:</sub> "+ val_serviceProviderId + " (0x"+val_serviceProviderId.toString(16).toUpperCase()+")";
+    }
+    if (val_hdrLen > 0) {
         txt_privateHeaderData.innerHTML = "<sub>Private_Header_Data:</sub> "+ val_privateHeaderData + " (0x"+val_privateHeaderData.toString(16).toUpperCase()+")";
     }
     txt_payload.innerHTML = val_payload;
     txt_crc.innerHTML = val_crc;
 
     let crc_generated = document.getElementById("crc_generated");
-    crc_generated.innerText = calculated_crc.toString(16).toUpperCase();
+    crc_generated.innerText = calculated_crc.toString(16);
+
+    check_integration();
 }
 
 var convert_text_to_blob = (inputtext) => {
@@ -194,6 +204,31 @@ var convert_text_to_blob = (inputtext) => {
 }
 
 
+/*  패킷 파싱한 결과의 무결성 (?) 검사를 위해, parsing 완료된 데이터 들의 조건 및 값의 범위 등을 check 한다. 
+*/
+var check_integration = () => {
+    var _has_weird = false;
+    if ( (val_p==0) && (val_serviceProviderId != "") ) {
+        console.log("[][] WARNING [][] Somthing Wrong !! if val_p==0 then val_serviceProviderId must be 0 !!");
+        _has_weird = true;
+    }
+    if ( (val_hdrLen<=0) && (val_privateHeaderData != "") ) {
+        console.log("[][] WARNING [][] Somthing Wrong !! if val_hdrLen then val_privateHeaderData must be empty !!");
+    }
+    if ( (val_c == 0) && (val_crc != -1) ) {
+        console.log("[][] WARNING [][] Somthing Wrong !! if val_c==0 then val_crc must be -1 !!");
+    } else {
+        // if (val_crc != calculated_crc ) {
+        //     console.log("[][] WARNING [][] CRC value mismatched !!");
+        // }
+    }
+
+    if (_has_weird ) {
+        console.log("[][] WARNING [][] Somthing Wrong !! if val_c==0 then val_crc must be -1 !!");
+        return;
+    }
+    console.log("Integriy OK !! ");
+}
 
 
 /*  
