@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- <link rel="shortcut icon" href="./favicon.ico"> -->
+    <meta charset="utf-8" lang="kr">
+    <link rel="stylesheet" type="text/css" href="../style/fontstyle.css" />
+    <link rel="stylesheet" type="text/css" href="../style/packetparser.css" />
+
+    <title> DVBSTP - CRID container 분석 tool </title>
+    <style>
+      @media ( max-width: 768px ) {   /* 모바일용 CSS 스타일쉬트 */
+        @import url("../style/newstyle_m.css"); 
+      }
+      @media ( min-width: 769px ) {   /* PC브라우저용 CSS 스타일쉬트 */
+        @import url("../style/newstyle.css"); 
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>DVBSTP - CRID container 구조 </h1> <h6>by aschoi@aircode.com</h6>
+      <img src="./img/CRID_container_Syntax.png" width="540px"/>
+      <img src="./img/CRID_structure_type.png" width="540px"/>
+    </header>
+
+    <div class="stream_input">
+        스트림파일 : <input type="file" id="crid_container_file_in" accept=".*" onchange="cri_file_changed();"/><span class="comment">Drag & Drop available.</span>
+        <br/> 또는  <br/>
+        텍스트로 입력 (16진수 DUMP): <br/>
+        <textarea id="cri_packet" cols="80" rows="4" onchange="cri_from_text();"></textarea>
+    </div>
+    <div  class="result">
+        결과:<br/>
+        <p>CRI의 갯수(num_cri_structures): <b><span id="num_cri_structures"></span></b></p>
+        <ul id="container_header">
+
+        </ul>
+
+        <hr>
+        <ul id="cri_structure">
+        </ul>
+          
+    </div>
+
+  </body>
+
+  <script src="./script/cri_parse.js" type="text/javascript" charset="utf-8"> </script>
+</html>
+
+
+
