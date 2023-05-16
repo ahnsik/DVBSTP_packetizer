@@ -21,7 +21,8 @@
     <header>
       <h1>DVBSTP packet 구조 </h1> <h6>by aschoi@aircode.com</h6>
         <table>
-            <th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th>    <th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th>
+            <th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th>
+            <th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th>
             <tr>
                 <td colspan="2">ver</td><td colspan="3">Reserv</td><td colspan="2">Enc</td><td>C</td><td colspan="24">Total_Segment_Size</td>
             </tr>
@@ -47,7 +48,7 @@
     </header>
 
     <div class="stream_input">
-        스트림파일: <input type="file" id="dvbstp_file_in" accept=".*" onchange="dvbstp_file_changed();"/><span class="comment">Drag & Drop available.</span>
+        스트림파일: <input class="drag_drop" type="file" id="dvbstp_file_in" accept=".*" onchange="dvbstp_file_changed();"/><span class="comment">Drag & Drop available.</span>
         <br/> 또는 <br/>
         텍스트로 입력 (16진수 DUMP): <br/>
         <textarea id="dvbstp_packet" cols="80" rows="4" onchange="dvbstp_from_text();"></textarea>
@@ -56,7 +57,8 @@
         결과:<br/>
         <p>Payload type: <b><span id="payload_kind"></span></b></p>
         <table>
-            <th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th>    <th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th>
+            <th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th>
+            <th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th>
             <tr>
                 <td id="ver" colspan="2">ver</td><td id="Reserv" colspan="3">Reserv</td>
                 <td id="Enc" colspan="2">Enc</td><td id="C" colspan="1">C</td><td id="Total_Segment_Size" colspan="24">Total_Segment_Size</td>

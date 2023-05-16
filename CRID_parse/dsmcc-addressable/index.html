@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- <link rel="shortcut icon" href="./favicon.ico"> -->
+    <meta charset="utf-8" lang="kr">
+    <link rel="stylesheet" type="text/css" href="../../style/fontstyle.css" />
+    <link rel="stylesheet" type="text/css" href="../../style/packetparser.css" />
+
+    <title> DVBSTP - CRID container 분석 tool </title>
+    <style>
+      @media ( max-width: 768px ) {   /* 모바일용 CSS 스타일쉬트 */
+        @import url("../../style/newstyle_m.css"); 
+      }
+      @media ( min-width: 769px ) {   /* PC브라우저용 CSS 스타일쉬트 */
+        @import url("../../style/newstyle.css"); 
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>DVBSTP - DSMCC-addressable section 구조 </h1> <h6>by aschoi@aircode.com</h6>
+      <img src="../img/dsmcc-addressable-sections.png" width="540px"/>
+    </header>
+
+    <div class="stream_input">
+        스트림파일 : <input class="drag_drop" type="file" id="dsmcc-addressable_file_in" accept=".*" onchange="dsmcc-addressable_file_changed();"/><span class="comment">Drag & Drop available.</span>
+        <br/> 또는  <br/>
+        텍스트로 입력 (16진수 DUMP): <br/>
+        <textarea id="dsmcc-addressable" cols="80" rows="4" onchange="packet_from_text();"></textarea>
+    </div>
+    <div  class="result">
+        결과:<br/>
+        <table>
+          <th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th>
+          <th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th>
+          <tr>
+            <td id="table_id" colspan="8">table_id=0x3F</td><td id="mustbe_0" colspan="1">'0'</td><td id="error_detection_type" colspan="1">error<br/>detect<br/>type</td>
+            <td id="reserved_1" colspan="2">reserved</td><td id="addrsect_len" colspan="12">addressable section length</td><td id="devid_0" colspan="8">deviceid[7..0]</td>
+          </tr>
+          <tr>
+            <td id="devid_1" colspan="8">deviceid[15..8]</td><td id="reserved_2" colspan="2">reserved</td><td id="payload_scrmb_ctrl" colspan="2">payload<br/>scrambling<br/>control</td>
+            <td id="addr_scrmb_ctrl" colspan="2">address<br/>scrambling<br/>control</td><td id="LLC_flg" colspan="1">LLCSNAP_flag</td><td id="mustbe_1" colspan="1">'1'</td>
+            <td id="section_num" colspan="8">section_number</td><td id="last_section_numb" colspan="8">last secition number</td>
+          </tr>
+          <tr>
+            <td id="devid_2" colspan="8"><br/>deviceid[23..16]<br/></td><td id="devid_3" colspan="8"><br/>deviceid[31..24]<br/></td>
+            <td id="devid_4" colspan="8"><br/>deviceid[39..32]<br/></td><td id="devid_5" colspan="8"><br/>deviceid[47..40]<br/></td>
+          </tr>
+          <tr id="LLCSNAP">
+            <td id="SNU_low" colspan="32">datagram_data_byte</td>
+          </tr>
+          <tr id="stuff">
+            <td id="stuff_byte" colspan="32">stuffing_bytes</td>
+          </tr>
+          <tr id="checksum">
+            <td id="checksum" colspan="32">checksum</td>
+          </tr>
+          <tr>
+            <td id="crc32" colspan="32">CRC_32</td>
+          </tr>
+      </table>
+          
+    </div>
+
+  </body>
+
+  <script src="../script/dsmcc-addressable.js" type="text/javascript" charset="utf-8"> </script>
+</html>
+
+
+

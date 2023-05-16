@@ -36,12 +36,12 @@ textarea {
     padding: 20px;
 }
 
-input {
-    width: "100%";
+input.drag_drop {
+    border: 1px solid royalblue;
 }
 
-#dvbstp_file_in {
-    border: 1px solid royalblue;
+input {
+    width: "100%";
 }
 
 sub {
